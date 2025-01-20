@@ -68,5 +68,24 @@ class Bank {
         this.accounts.push(account);
         return account;
     }
+    /**
+     * The depositIntoAccount method find the account and deposit some money into it.
+     * @param username the username
+     * @param accountNumber the account number
+     * @param depositAmount the amount of money to be deposited into account
+     */
+    depositIntoAccount(username, accountNumber, depositAmount) {
+        const targetAccount = this.findAccountById(accountNumber);
+        if (!targetAccount) {
+            throw new Error('Invalid account number');
+        }
+        if (!this.isUsernameExists(username)) {
+            throw new Error('User not found');
+        }
+        if (depositAmount <= 0) {
+            throw new Error('Deposit amount cannot be less than or equal to 0');
+        }
+        targetAccount.balance += depositAmount;
+    }
 }
 exports.Bank = Bank;
