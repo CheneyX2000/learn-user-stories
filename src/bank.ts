@@ -118,4 +118,23 @@ export class Bank implements BankType {
 
         targetAccount.balance -= withdrawAmount;
     }
+
+    /**
+     * The checkBalance check the balance of an account.
+     * @param username the username
+     * @param accountNumber the account number
+     * @returns a number representing the current balance of the account.
+     */
+    checkBalance(username: string, accountNumber: number): number {
+        const targetAccount: AccountType | undefined = this.findAccountById(accountNumber);
+        
+        if (!targetAccount) {
+            throw new Error('Invalid account number');
+        }
+        if (!this.isUsernameExists(username)) {
+            throw new Error('User not found');
+        }
+
+        return targetAccount.balance
+    }
 }
