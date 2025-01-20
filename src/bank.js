@@ -87,5 +87,24 @@ class Bank {
         }
         targetAccount.balance += depositAmount;
     }
+    /**
+     * The withdrawFromAccount withdraws a specified amount of money from an account
+     * @param username the username
+     * @param accountNumber the account number
+     * @param withdrawAmount the amount of money to be withdrawn
+     */
+    withdrawFromAccount(username, accountNumber, withdrawAmount) {
+        const targetAccount = this.findAccountById(accountNumber);
+        if (!targetAccount) {
+            throw new Error('Invalid account number');
+        }
+        if (!this.isUsernameExists(username)) {
+            throw new Error('User not found');
+        }
+        if (withdrawAmount <= 0 || withdrawAmount > targetAccount.balance) {
+            throw new Error('Withdraw amount cannot be less than or equal to 0 or greater than the current balance');
+        }
+        targetAccount.balance -= withdrawAmount;
+    }
 }
 exports.Bank = Bank;
